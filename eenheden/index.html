@@ -59,8 +59,7 @@
             Eenheden omreken oefenapp
           </div>
           <div class="card-body">
-            <select class="form-select" id="dim_select">
-              <option selected>Maak een keuze...</option>
+            <select class="form-select" id="dimselect">
               <option value="1">1D (lengte)</option>
               <option value="2">2D (oppervlakte)</option>
               <option value="3">3D (inhoud)</option>
@@ -68,18 +67,18 @@
             <div class="row mt-3">
               <div class="col-5"><div class="input-group mb-3">
                 <input type="text" class="form-control" id="opg_input">
-                <span class="input-group-text" id="opg_eenheid">cm</span>
+                <span class="input-group-text" id="opg_eenheid"></span>
               </div></div>
               <div class="col-1">=</div>
               <div class="col-6"><div class="input-group mb-3">
                 <input type="text" class="form-control"  id="antw_input">
-                <span class="input-group-text" id="antw_eenheid">m</span>
+                <span class="input-group-text" id="antw_eenheid"></span>
               </div></div>
             </div>
 
             <div class="row">
-              <div class="col d-grid"><button class="btn btn-primary" onclick="hallo()">NIEUW</button></div>
-              <div class="col d-grid"><button class="btn btn-success" onclick="helloworld()">CHECK</button></div>
+              <div class="col d-grid"><button class="btn btn-primary" onclick="nieuw()">NIEUW</button></div>
+              <div class="col d-grid"><button class="btn btn-success" onclick="check()">CHECK</button></div>
             </div>
             
           </div>
