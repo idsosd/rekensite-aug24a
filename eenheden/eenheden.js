@@ -13,21 +13,33 @@ let opgeenh = document.getElementById("opg_eenheid");
 let antw = document.getElementById("antw_input");
 let antweenh = document.getElementById("antw_eenheid");
 
-function nieuw()
-{
-    let dim = dimension.value
-    //Math.random genereert een getal tussen 0 en 1, waarbij 0 wel kan, maar 1 niet
-    //door *7 te doen, krijg je een getal tussen 0 en 7
-    let randomnmbr = Math.floor(Math.random() * 7);
-    opgeenh.innerHTML = eenheden[randomnmbr] + "<sup>" + dim + "</sup>";
-    //console.log("randomnmbr = " + randomnmbr)
-    //console.log("de gekozen dimensie = " + dim);
-    //console.log("het gekozen element uit eenheden is: " + eenheden[randomnmbr])
-    //het programma moet zijn werk gaan doen......
+function nieuw() {
+    antw.value = "";
+    let dim = dimension.value;
+    let index_opg = Math.floor(Math.random() * 7);
+    let index_antw = Math.floor(Math.random() * 7);
+    if (dim != 1) {
+        opgeenh.innerHTML = eenheden[index_opg] + "<sup>" + dim + "</sup>";
+        antweenh.innerHTML = eenheden[index_antw] + "<sup>" + dim + "</sup>";
+    } else {
+        opgeenh.innerHTML = eenheden[index_opg];
+        antweenh.innerHTML = eenheden[index_antw];
+    }
+    let opgdec = (Math.random() *1000).toFixed(3);
+    opg.value = opgdec;
+    //we gaan ook meteen het juiste antwoord uit laten rekenen
+    let factor = Math.pow(10, dimension.value);
+    
+    if(index_opg < index_antw){
+        let aantalsprongen = (index_antw - index_opg) * dim;
+        console.log("factor = " + factor + " en de komma moet " + aantalsprongen + " naar links");
+    } else {
+        let aantalsprongen = (index_opg - index_antw) * dim;
+        console.log("factor = " + factor + " en de komma moet " + aantalsprongen + " naar rechts");
+    }
     
 }
 
-function check()
-{
-
+function check() {
+    
 }
