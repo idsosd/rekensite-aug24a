@@ -13,11 +13,14 @@ let opgeenh = document.getElementById("opg_eenheid");
 let antw = document.getElementById("antw_input");
 let antweenh = document.getElementById("antw_eenheid");
 
+let antw_berekend = new Decimal('0');
+
 function nieuw() {
+    //alleen nodig om te resetten
     antw.value = "";
-    let dim = dimension.value;
-    let index_opg = Math.floor(Math.random() * 7);
-    let index_antw = Math.floor(Math.random() * 7);
+    let dim = new Decimal(dimension.value);
+    let index_opg = Decimal.floor(Decimal.random() * 7);
+    let index_antw = Decimal.floor(Decimal.random() * 7);
     if (dim != 1) {
         opgeenh.innerHTML = eenheden[index_opg] + "<sup>" + dim + "</sup>";
         antweenh.innerHTML = eenheden[index_antw] + "<sup>" + dim + "</sup>";
@@ -25,21 +28,28 @@ function nieuw() {
         opgeenh.innerHTML = eenheden[index_opg];
         antweenh.innerHTML = eenheden[index_antw];
     }
-    let opgdec = (Math.random() *1000).toFixed(3);
+    let opgdec = new Decimal((Decimal.random() *1000).toFixed(3));
     opg.value = opgdec;
     //we gaan ook meteen het juiste antwoord uit laten rekenen
     let factor = Math.pow(10, dimension.value);
-    
+    //de Math.abs zorgt er voor dat het aantal sprongen altijd positief
+    let aantalsprongen = Decimal.abs(index_opg - index_antw);
+    let verm_factor = Decimal.pow(factor, aantalsprongen);
     if(index_opg < index_antw){
-        let aantalsprongen = (index_antw - index_opg) * dim;
-        console.log("factor = " + factor + " en de komma moet " + aantalsprongen + " naar links");
+        //we moeten gaan delen
+        antw_berekend = opgdec.div(verm_factor);
     } else {
-        let aantalsprongen = (index_opg - index_antw) * dim;
-        console.log("factor = " + factor + " en de komma moet " + aantalsprongen + " naar rechts");
+        //we moeten gaan vermenigvuldigen
+        antw_berekend = opgdec.times(verm_factor);
     }
-    
+    console.log("het berekende antwoord = " + antw_berekend); 
 }
 
 function check() {
-    
+    let antw_ingev = new Decimal(antw.value);
+    if(antw_ingev.equals(antw_berekend)){
+        console.log("goed");
+    } else {
+        console.log("fout");
+    }
 }
